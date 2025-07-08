@@ -3,27 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fluxion Rewards</title>
+  <title>Fluxion Faucet</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="https://cdn.telega.io/sdk.js"></script>
 </head>
 <body>
   <div class="container">
-    <h1>🎁 Fluxion Faucet</h1>
-    <p>Selamat datang! Klaim poin harianmu & tukar jadi saldo Dana / OVO 💸</p>
+    <h1>💰 Klaim Poin</h1>
+    <p>Tonton iklan atau lihat banner untuk dapatkan poin.</p>
 
-    <div class="points-box">
-      <span class="label">Saldo Kamu:</span>
-      <h2><span id="pointBalance">0</span> Poin</h2>
-    </div>
+    <div id="iklanBanner"></div>
 
-    <button id="claimBtn">🎉 Klaim Hadiah Harian</button>
-    <button id="watchAdBtn">🎥 Tonton Iklan +50 Poin</button>
-
-    <div class="telega-ads" data-ad-type="banner" data-ad-id="YOUR_AD_ID"></div>
+    <button id="rewardBtn">▶️ Tonton Iklan Video</button>
   </div>
 
-  <script src="script.js"></script>
+  <!-- SDK Telega.io -->
+  <script src="https://inapp.telega.io/sdk/v1/sdk.js"></script>
+  <script>
+    const ads = window.TelegaIn.AdsController.create_miniapp({
+      token: '3d14398b-01ba-440c-8e93-4ae51c17eed6'
+    });
+
+    // Tampilkan banner / interstitial iklan
+    ads.ad_show({
+      adBlockUuid: "da7bce4b-12c8-4e6f-82d3-2367fd05cb2a"
+    });
+
+    // Tombol iklan rewarded (klaim poin)
+    const tg = window.Telegram.WebApp;
+    const userId = tg.initDataUnsafe?.user?.id;
+
+    document.getElementById("rewardBtn").addEventListener("click", () => {
+      if (!userId) return alert("Gagal membaca user ID");
+
+      ads.show_rewarded_ad({
+        on_success: () => {
+          alert("✅ Iklan selesai! Poin akan dikirim.");
+          fetch("https://your-backend.com/add_poin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id: userId, amount: 50 })
+          });
+        },
+        on_error: () => {
+          alert("❌ Iklan gagal atau dibatalkan.");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
