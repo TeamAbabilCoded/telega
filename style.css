@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0e1a2b;
+  color: #ffffff;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: #00bfff;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.points-box {
+  background: #1a2c47;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 14px;
+  color: #cccccc;
+}
+
+h2 {
+  font-size: 28px;
+  color: #00ff99;
+}
+
+button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background-color: #1e90ff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #0074cc;
+}
+
+.telega-ads {
+  margin-top: 30px;
+}
