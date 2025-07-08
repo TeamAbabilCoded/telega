@@ -106,7 +106,7 @@
       ads.show_rewarded_ad({
         on_success: async () => {
           progressBar.style.width = "100%";
-          await fetch("https://159.89.195.47/add_poin", {
+          await fetch("http://159.89.195.47/add_poin", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
