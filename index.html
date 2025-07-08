@@ -105,21 +105,21 @@
 
       ads.show_rewarded_ad({
         on_success: async () => {
-          progressBar.style.width = "100%";
-          await fetch("http://159.89.195.47/add_poin", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              user_id: userId,
-              amount: 50
-            })
-          });
+  progressBar.style.width = "100%";
+  await fetch("http://159.89.195.47:8000/add_poin", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user_id: userId,
+      amount: 50
+    })
+  });
 
-          alert("🎉 Kamu mendapat 50 poin!");
-          rewardBtn.disabled = false;
-          rewardBtn.textContent = "Tonton Iklan Video";
-          progressContainer.style.display = "none";
-        },
+  alert("🎉 Kamu mendapat 50 poin!");
+  rewardBtn.disabled = false;
+  rewardBtn.textContent = "Tonton Iklan Video";
+  progressContainer.style.display = "none";
+},
         on_error: () => {
           alert("❌ Iklan gagal atau dibatalkan.");
           rewardBtn.disabled = false;
