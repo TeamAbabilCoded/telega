@@ -6,15 +6,40 @@ body {
   text-align: center;
   padding: 20px;
 }
+
 button {
-  background: #1e90ff;
+  background: linear-gradient(135deg, #1e90ff, #007bff);
   border: none;
-  padding: 14px 20px;
-  border-radius: 8px;
+  padding: 14px 24px;
+  border-radius: 12px;
   color: white;
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(30, 144, 255, 0.3);
 }
+
+button:hover {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+#progressBarContainer {
+  width: 80%;
+  background-color: #333;
+  border-radius: 8px;
+  margin: 20px auto;
+  display: none;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 20px;
+  background-color: #4caf50;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
 .note {
   font-size: 14px;
   margin-top: 30px;
