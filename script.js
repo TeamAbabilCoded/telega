@@ -1,21 +1,16 @@
-let pointBalance = 0;
+const tg = window.Telegram.WebApp;
+const userId = tg.initDataUnsafe.user?.id;
+const username = tg.initDataUnsafe.user?.username;
 
-document.getElementById("claimBtn").addEventListener("click", () => {
-  pointBalance += 100;
-  updatePoints();
-  alert("Kamu berhasil klaim 100 poin!");
-});
+document.getElementById("claimBtn").addEventListener("click", async () => {
+  if (!userId) return alert("Gagal ambil ID user.");
 
-document.getElementById("watchAdBtn").addEventListener("click", () => {
-  telegaAds.showRewardedAd().then(() => {
-    pointBalance += 50;
-    updatePoints();
-    alert("Terima kasih! Kamu dapat 50 poin dari iklan.");
-  }).catch(() => {
-    alert("Iklan gagal dimuat, coba lagi nanti.");
+  const res = await fetch("https://your-vps-or-domain.com/claim", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ user_id: userId, username: username || "" })
   });
-});
 
-function updatePoints() {
-  document.getElementById("pointBalance").innerText = pointBalance;
-}
+  const result = await res.json();
+  alert(result.message);
+});
