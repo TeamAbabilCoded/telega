@@ -59,14 +59,17 @@
   <!-- SDK Telega.io -->
   <script src="https://inapp.telega.io/sdk/v1/sdk.js"></script>
   <script>
+    // Inisialisasi Telega.io
     const ads = window.TelegaIn.AdsController.create_miniapp({
       token: '3d14398b-01ba-440c-8e93-4ae51c17eed6'
     });
 
+    // Tampilkan banner otomatis
     ads.ad_show({
       adBlockUuid: "da7bce4b-12c8-4e6f-82d3-2367fd05cb2a"
     });
 
+    // Ambil ID user dari URL (?id=123456)
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get("id");
 
@@ -74,10 +77,10 @@
     const progressContainer = document.getElementById("progressBarContainer");
     const progressBar = document.getElementById("progressBar");
 
+    // Fungsi animasi progress bar
     function startProgress(duration = 15) {
       progressContainer.style.display = "block";
       progressBar.style.width = "0%";
-
       let progress = 0;
       const interval = setInterval(() => {
         progress += 100 / duration;
@@ -86,6 +89,7 @@
       }, 1000);
     }
 
+    // Event klik tombol reward
     rewardBtn.addEventListener("click", (e) => {
       e.preventDefault();
       if (!userId) return alert("❌ Gagal membaca user ID.");
@@ -97,6 +101,7 @@
       ads.show_rewarded_ad({
         on_success: async () => {
           progressBar.style.width = "100%";
+
           try {
             const res = await fetch("http://159.89.195.47:8000/add_poin", {
               method: "POST",
